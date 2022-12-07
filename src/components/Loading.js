@@ -2,13 +2,13 @@ import React from "react";
 import { View, Modal, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
 
-export default function Loading() {
+export default function Loading({ visible }) {
   return (
-    <Modal transparent>
+    <Modal transparent visible={visible}>
       <View style={styles.view}>
         <LottieView
           style={StyleSheet.loadingLottie}
-          source={require("../../assets/lottie/truck-loading.json")}
+          source={require("../../assets/lottie/loading.json")}
           autoPlay
         />
       </View>
