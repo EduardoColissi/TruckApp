@@ -51,7 +51,7 @@ const Routes = () => {
     const [authState, dispatch] = useReducer(authReducer, initialAuthState);
 
     const authContext = useMemo(() => ({
-        signIn: async (email, password) => {
+        signIn: async (cpf, password) => {
             let token;
             token = null;
 
@@ -59,7 +59,7 @@ const Routes = () => {
             user_type = null;
 
             let data = {
-                email: email,
+                cpf: cpf,
                 password: password,
             };
         
@@ -92,7 +92,7 @@ const Routes = () => {
 
             dispatch({ type: "LOGOUT" });
         },
-        signUp: async (name, surname, email, password, type) => {
+        signUp: async (name, cpf, password, type) => {
             let token;
             token = null;
 
@@ -101,8 +101,7 @@ const Routes = () => {
 
             let data = {
                 name: name,
-                surname: surname,
-                email: email,
+                cpf: cpf,
                 password: password,
                 type: type,
             };
