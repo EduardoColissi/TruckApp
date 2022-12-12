@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import Routes from './src/index';
 import Loading from "./src/components/Loading";
+import { StyleSheet } from "react-native";
 
 export default function App() {
   const [loading, setLoading] = useState(false);
@@ -17,9 +18,7 @@ export default function App() {
       {loading ? (
         <Loading visible={loading} />
       ) : (
-        <View style={styles.container}>
-          <Text>Hello World!</Text>
-        </View>
+        <Routes />
       )}
     </>
   );

@@ -3,7 +3,7 @@ import { View, Text, Button } from 'react-native';
 
 import styles from './styles';
 
-import { AuthContext } from '../../../../components/Context';
+import { AuthContext } from '../../../components/Context';
 
 const Home = () => {
     const { signOut } = useContext(AuthContext); 

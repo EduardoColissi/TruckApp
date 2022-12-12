@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from '../pages/authentication/Login';
-import Signup from '../pages/authentication/Signup';
+import Login from "../screens/authtentication/Login"
+import Signup from '../screens/authtentication/Signup';
 
 const AuthStack = createStackNavigator();
 
