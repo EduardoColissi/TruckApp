@@ -80,7 +80,6 @@ const Login = ({ navigation }) => {
                   onChangeText={formikProps.handleChange("password")}
                   placeholder="Senha"
                   secureTextEntry
-                  leftIcon={<Icon name="lock" size={24} color="black" />}
                   onBlur={formikProps.handleBlur("password")}
                 />
                 <ErrorMessage
