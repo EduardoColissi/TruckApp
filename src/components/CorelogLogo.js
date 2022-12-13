@@ -1,5 +1,9 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+import { Image } from "react-native-elements";
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 
 const CorelogLogo = () => {
   return (
@@ -9,9 +13,9 @@ const CorelogLogo = () => {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 250,
-    height: 75,
-    marginBottom: 20,
+    marginTop: 250,
+    width: screenWidth * 0.93,
+    height: screenHeight * 0.1,
   },
 });
 

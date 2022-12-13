@@ -4,9 +4,10 @@ import { Button } from 'react-native-elements';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+//Botão para formulário, que pode ser reutilizado de forma dinâmica
 const FormButton = ({ title, buttonType, ...rest }) => (
   <LinearGradient 
-    colors={['#3273A6', '#57D9CB']} 
+    colors={['#8fc223', '#7eb806']} 
     start={[0, 0]} 
     end={[1, 0]}
     style={{borderRadius:20}}
@@ -24,7 +25,6 @@ const FormButton = ({ title, buttonType, ...rest }) => (
 const styles = StyleSheet.create({
   formButton: {
     backgroundColor: "transparent",
-    borderRadius: 20
   },
   formButtonTitle: {
     color: "white",

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+//Mensagem de erro dinâmica
 const ErrorMessage = ({ errorValue }) => {
   return (
     <View style={styles.container}>

@@ -1,102 +1,105 @@
-import React, { Fragment, useContext, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import React, { Fragment, useContext, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { AuthContext } from '../../../components/Context';
+import { AuthContext } from "../../../components/Context";
 
-import styles from './styles';
+import styles from "./styles";
 
-//import custom components
-import FormInput from '../../../components/FormInput';
-import FormButton from '../../../components/FormButton';
-import ErrorMessage from '../../../components/ErrorMessage';
+import FormInput from "../../../components/FormInput";
+import FormButton from "../../../components/FormButton";
+import ErrorMessage from "../../../components/ErrorMessage";
+import CorelogLogo from "../../../components/CorelogLogo";
 
-//to validate inputs and show error messages
+//Funções para validar formulario e mostrar mensagens de erro
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .label('Email')
-    .email('Enter a valid email')
-    .required('Please enter a registered email'),
+  cpf: Yup.string()
+    .label("CPF")
+    .min(11, "Digite um CPF válido.")
+    .max(14, "Digite um CPF válido.")
+    .required("Por favor, digite um CPF cadastrado."),
   password: Yup.string()
-    .label('Password')
-    .required()
-    .min(8, 'Password must have at least 8 characters ')
-})
+    .label("Senha")
+    .required("Por favor, digite sua senha.")
+    .min(6, "A sua senha deve ter mais de 6 caracteres."),
+});
 
 const Login = ({ navigation }) => {
+  //atribui a constante singnin ao contexto de autenticacao
   const { signIn } = useContext(AuthContext);
 
+  //state para mostrar erros
   const [loginError, setLoginError] = useState(false);
 
   return (
     <LinearGradient
-      colors={['#3273A6', '#57D9CB']}
+      colors={["#357309", "#3c8509"]}
       start={[0, 0]}
       end={[1, 0]}
       style={styles.container}
     >
       <KeyboardAwareScrollView>
-        <Text style={styles.title}>
-          MyApp
-        </Text>
+        <CorelogLogo />
         <View style={styles.formContainer}>
-          <Text style={styles.formTitle}>
-            Log In
-          </Text>
           <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ cpf: "", password: "" }}
             validationSchema={validationSchema}
-
-            //'data' gives acess to 'initialValues'
+            //'data' da acesso ao 'initialValues'
             onSubmit={async (data) => {
               var statusCode;
-              //calling the sigIn from our context, passing form inputs as parameter
-              statusCode = await signIn(data.email, data.password);
+              //chamando sigIn do nosso contexto, passando os inputs do formulario como parametro
+              statusCode = await signIn(data.cpf, data.password);
               if (statusCode === 401) setLoginError(true);
               else if (statusCode === 200) setLoginError(false);
             }}
           >
-            {formikProps => (
+            {(formikProps) => (
               <Fragment>
                 <FormInput
-                  name='email'
-                  value={formikProps.email}
-                  onChangeText={formikProps.handleChange('email')}
-                  placeholder='Enter email'
-                  autoCapitalize='none'
-                  iconName='ios-mail'
-                  iconColor='#2C384A'
-                  onBlur={formikProps.handleBlur('email')}
+                  name="cpf"
+                  value={formikProps.cpf}
+                  onChangeText={formikProps.handleChange("cpf")}
+                  placeholder="CPF"
+                  autoCapitalize="none"
+                  onBlur={formikProps.handleBlur("cpf")}
                 />
 
-                {/* .touched make the error message show only for fields that already are visited*/}
-                <ErrorMessage errorValue={formikProps.touched.email && formikProps.errors.email} />
+                {/* .touched é usado para definir que o erro só aparecerá se o input ja ter sido visitado */}
+                <ErrorMessage
+                  errorValue={
+                    formikProps.touched.cpf && formikProps.errors.cpf
+                  }
+                />
 
                 <FormInput
-                  name='password'
+                  name="password"
                   value={formikProps.password}
-                  onChangeText={formikProps.handleChange('password')}
-                  placeholder='Enter password'
+                  onChangeText={formikProps.handleChange("password")}
+                  placeholder="Senha"
                   secureTextEntry
-                  iconName='ios-lock'
-                  iconColor='#2C384A'
-                  onBlur={formikProps.handleBlur('password')}
+                  leftIcon={<Icon name="lock" size={24} color="black" />}
+                  onBlur={formikProps.handleBlur("password")}
                 />
-                <ErrorMessage errorValue={formikProps.touched.password && formikProps.errors.password} />
+                <ErrorMessage
+                  errorValue={
+                    formikProps.touched.password && formikProps.errors.password
+                  }
+                />
 
                 {loginError === true ? (
-                  <ErrorMessage errorValue="Wrong e-mail or password. Try again." />) : (
-                    <View />)
-                }
+                  <ErrorMessage errorValue="CPF ou senha incorretos. Tente novamente" />
+                ) : (
+                  <View />
+                )}
 
                 <View style={styles.buttonContainer}>
                   <FormButton
-                    title='LOG IN'
+                    title="LOGIN"
                     onPress={formikProps.submitForm}
-                    //this change the button color to grey if the fileds arent valids or to waiting the auth server response
+                    //valida se os inputs estão com informações dentro das regras, se não estiverem, deixa o input disable
                     disabled={!formikProps.isValid}
                   />
                 </View>
@@ -105,14 +108,15 @@ const Login = ({ navigation }) => {
           </Formik>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signupButton}>
-            Don't have an account? <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
+            Não possui conta?{" "}
+            <Text style={{ fontWeight: "bold" }}>Registre-se</Text>
           </Text>
         </TouchableOpacity>
       </KeyboardAwareScrollView>
     </LinearGradient>
-  )
-}
+  );
+};
 
 export default Login;

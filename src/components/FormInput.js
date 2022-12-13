@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 
+//Input de formulario
 const FormInput = ({
     iconName,
     iconColor,
@@ -15,7 +16,7 @@ const FormInput = ({
     <View style={styles.inputContainer}>
         <Input
             {...rest}
-            placeholderTextColor="#a4a4a4"
+            placeholderTextColor="#ffff"
             name={name}
             value={value}
             placeholder={placeholder}
@@ -27,7 +28,12 @@ const FormInput = ({
 const styles = StyleSheet.create({
     inputContainer: {
         marginHorizontal: 10,
+        marginVertical: 3,
+        color: "white",
     },
+    input: {
+        color: "white",
+    }
 });
   
 export default FormInput;

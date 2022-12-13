@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
-export default StyleSheet.create({
+export default styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
@@ -19,11 +19,9 @@ export default StyleSheet.create({
     alignSelf: "center"
   },
   formContainer:{
-    marginTop: screenHeight * 0.15,
-    backgroundColor: "white",
-    width: screenWidth * 0.8,
+    marginTop: screenHeight * 0.05,
+    width: screenWidth * 0.85,
     height: screenHeight * 0.4,
-    borderRadius: 10,
   },
   formTitle:{
     fontSize: 17,

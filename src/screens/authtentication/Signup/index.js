@@ -9,12 +9,11 @@ import { AuthContext } from '../../../components/Context';
 
 import styles from './styles';
 
-//import custom components
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import ErrorMessage from '../../../components/ErrorMessage';
 
-//to validate inputs and show error messages
+//O yup é usado para validar o formulário no frontend, com base nas regras definidas no backend
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required('Please enter a name'),
@@ -55,12 +54,9 @@ const Signup = ({ navigation }) => {
                     <Formik
                         initialValues={{ name: '', surname: '', email: '', password: '', passwordConfirmation: '' }}
                         validationSchema={validationSchema}
-
-                        //'data' gives acess to 'initialValues'
                         onSubmit={async (data) => {
                             var statusCode;
                             var userType = "user",
-                            //calling the sigUp from our context, passing form inputs as parameter
                             statusCode = await signUp(data.name, data.surname, data.email, data.password, userType);
                             if (statusCode === 401) setSignupError(true);
                             else if (statusCode === 200) setSignupError(false);
@@ -76,7 +72,6 @@ const Signup = ({ navigation }) => {
                                     autoCapitalize='none'
                                     onBlur={formikProps.handleBlur('name')}
                                 />
-                                {/* .touched make the error message show only for fields that already are visited*/}
                                 <ErrorMessage errorValue={formikProps.touched.name && formikProps.errors.name} />
                                 
                                 <FormInput
@@ -129,7 +124,6 @@ const Signup = ({ navigation }) => {
                                     <FormButton
                                         title='SIGN UP'
                                         onPress={formikProps.submitForm}
-                                        //this change the button color to grey if the fileds arent valids or to waiting the auth server response
                                         disabled={!formikProps.isValid}
                                     />
                                 </View>
