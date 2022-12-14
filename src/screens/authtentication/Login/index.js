@@ -42,8 +42,8 @@ const Login = ({ navigation }) => {
       style={styles.container}
     >
       <KeyboardAwareScrollView>
-        <CorelogLogo />
         <View style={styles.formContainer}>
+        <CorelogLogo />
           <Formik
             initialValues={{ cpf: "", password: "" }}
             validationSchema={validationSchema}

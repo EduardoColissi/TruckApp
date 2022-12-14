@@ -11,38 +11,19 @@ export default styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  title:{
-    color: "white",
-    fontSize: 40,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    marginTop: screenHeight * 0.10,
-    alignSelf: "center",
-  },
   formContainer:{
-    marginTop: screenHeight * 0.1,
-    backgroundColor: "white",
-    width: screenWidth * 0.8,
-    height: screenHeight * 0.6,
-    borderRadius: 10,
-  },
-  formTitle:{
-    fontSize: 17,
-    color: "#a4a4a4",
-    fontWeight: "400",
-    alignSelf: "center",
-    marginTop: screenHeight * 0.03,
-    marginBottom: screenHeight * 0.03
+    marginTop: screenHeight * 0.15 ,
+    width: screenWidth * 0.9,
+    height: screenHeight * 0.65,
   },
   buttonContainer: {
-    marginHorizontal: 25,
-    marginVertical: 20,
+    margin: 3
   },
   loginButton: {
     color: "white",
-    fontWeight: "200",
-    fontSize: 14,
+    fontWeight: "300",
+    fontSize: 18,
     marginTop: screenHeight * 0.1,
-    alignSelf: "center"
+    alignSelf: "center",
   }
 });
