@@ -12,23 +12,22 @@ import styles from './styles';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import ErrorMessage from '../../../components/ErrorMessage';
+import CorelogLogo from '../../../components/CorelogLogo';
 
 //O yup é usado para validar o formulário no frontend, com base nas regras definidas no backend
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-        .required('Please enter a name'),
-    surname: Yup.string()
-        .required('Please enter a surname'),
-    email: Yup.string()
-        .label('Email')
-        .email('Enter a valid email')
-        .required('Please enter a email'),
+        .required('Por favor, digite seu nome completo.'),
+    cpf: Yup.string()
+        .required('Por favor, digite seu CPF.')
+        .min(11, 'Por favor, digite um CPF válido.')
+        .max(14, 'Por favor, digite um CPF válido.'),
     password: Yup.string()
         .label('Password')
-        .required()
-        .min(8, 'Password must have at least 8 characters '),
+        .required('Por favor, digite sua senha.')
+        .min(6, 'A sua senha deve ter 6 ou mais caracteres.'),
     passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .oneOf([Yup.ref('password'), null], 'Senhas não conferem.')
 })
 
 const Signup = ({ navigation }) => {
@@ -38,26 +37,24 @@ const Signup = ({ navigation }) => {
 
     return (
         <LinearGradient
-            colors={['#3273A6', '#57D9CB']}
+        colors={["#357309", "#3c8509"]}
             start={[0, 0]}
             end={[1, 0]}
             style={styles.container}
         >
             <KeyboardAwareScrollView>
-                <Text style={styles.title}>
-                    MyApp
-                </Text>
+                <CorelogLogo />
                 <View style={styles.formContainer}>
                     <Text style={styles.formTitle}>
-                        Sign Up
+                        Registre-se
                     </Text>
                     <Formik
-                        initialValues={{ name: '', surname: '', email: '', password: '', passwordConfirmation: '' }}
+                        initialValues={{ name: '', cpf: '', password: '', passwordConfirmation: '' }}
                         validationSchema={validationSchema}
                         onSubmit={async (data) => {
                             var statusCode;
                             var userType = "user",
-                            statusCode = await signUp(data.name, data.surname, data.email, data.password, userType);
+                            statusCode = await signUp(data.name, data.cpf, data.password, userType);
                             if (statusCode === 401) setSignupError(true);
                             else if (statusCode === 200) setSignupError(false);
                         }}
@@ -68,38 +65,30 @@ const Signup = ({ navigation }) => {
                                     name='name'
                                     value={formikProps.name}
                                     onChangeText={formikProps.handleChange('name')}
-                                    placeholder='Name'
+                                    label='Nome'
+                                    placeholder='Nome completo'
                                     autoCapitalize='none'
                                     onBlur={formikProps.handleBlur('name')}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.name && formikProps.errors.name} />
                                 
                                 <FormInput
-                                    name='surname'
-                                    value={formikProps.surname}
-                                    onChangeText={formikProps.handleChange('surname')}
-                                    placeholder='Surname'
+                                    name='cpf'
+                                    value={formikProps.cpf}
+                                    onChangeText={formikProps.handleChange('cpf')}
+                                    placeholder='Seu CPF'
+                                    label='CPF'
                                     autoCapitalize='none'
-                                    onBlur={formikProps.handleBlur('surname')}
+                                    onBlur={formikProps.handleBlur('cpf')}
                                 />                                
                                 <ErrorMessage errorValue={formikProps.touched.surname && formikProps.errors.surname} />
-
-
-                                <FormInput
-                                    name='email'
-                                    value={formikProps.email}
-                                    onChangeText={formikProps.handleChange('email')}
-                                    placeholder='Email'
-                                    autoCapitalize='none'
-                                    onBlur={formikProps.handleBlur('email')}
-                                />                                
-                                <ErrorMessage errorValue={formikProps.touched.email && formikProps.errors.email} />
 
                                 <FormInput
                                     name='password'
                                     value={formikProps.password}
                                     onChangeText={formikProps.handleChange('password')}
-                                    placeholder='Password'
+                                    placeholder='Sua senha'
+                                    label='Senha'
                                     secureTextEntry
                                     onBlur={formikProps.handleBlur('password')}
                                 />
@@ -109,20 +98,21 @@ const Signup = ({ navigation }) => {
                                     name='passwordConfirmation'
                                     value={formikProps.passwordConfirmation}
                                     onChangeText={formikProps.handleChange('passwordConfirmation')}
-                                    placeholder='Password Confirmation'
+                                    placeholder='Repita sua senha'
+                                    label='Confirmação de senha'
                                     secureTextEntry
                                     onBlur={formikProps.handleBlur('passwordConfirmation')}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.passwordConfirmation && formikProps.errors.passwordConfirmation} />
 
                                 {SignupError === true ? (
-                                    <ErrorMessage errorValue="Wrong e-mail or password. Try again." />) : (
+                                    <ErrorMessage errorValue="CPF ou Senha inválidos." />) : (
                                         <View />)
                                 }
 
                                 <View style={styles.buttonContainer}>
                                     <FormButton
-                                        title='SIGN UP'
+                                        title='Registrar'
                                         onPress={formikProps.submitForm}
                                         disabled={!formikProps.isValid}
                                     />
@@ -134,7 +124,7 @@ const Signup = ({ navigation }) => {
 
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.loginButton}>
-                        Already have an account? <Text style={{ fontWeight: "bold" }}>Log In</Text>
+                        Já tem uma conta? <Text style={{ fontWeight: "bold" }}>Login</Text>
                     </Text>
                 </TouchableOpacity>
             </KeyboardAwareScrollView>
