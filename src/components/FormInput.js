@@ -11,14 +11,18 @@ const FormInput = ({
     name,
     placeholder,
     value,
+    label,
+    leftIcon,
     ...rest
 }) => (
     <View style={styles.inputContainer}>
         <Input
             {...rest}
-            placeholderTextColor="#ffff"
+            labelStyle={{ color: "white" }}
+            label={label}
             name={name}
             value={value}
+            leftIcon={leftIcon}
             placeholder={placeholder}
             inputStyle={styles.input}
         />

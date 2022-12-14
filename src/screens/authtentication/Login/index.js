@@ -62,8 +62,10 @@ const Login = ({ navigation }) => {
                   name="cpf"
                   value={formikProps.cpf}
                   onChangeText={formikProps.handleChange("cpf")}
-                  placeholder="CPF"
+                  label="CPF"
+                  placeholder="Seu CPF"
                   autoCapitalize="none"
+                  leftIcon={{ type: 'font-awesome', name: 'user-circle-o' , color: 'white', size: 21}}
                   onBlur={formikProps.handleBlur("cpf")}
                 />
 
@@ -76,10 +78,12 @@ const Login = ({ navigation }) => {
 
                 <FormInput
                   name="password"
+                  label="Senha"
                   value={formikProps.password}
                   onChangeText={formikProps.handleChange("password")}
-                  placeholder="Senha"
+                  placeholder="Sua Senha"
                   secureTextEntry
+                  leftIcon={{ type: 'font-awesome', name: 'lock' , color: 'white', size: 25}}
                   onBlur={formikProps.handleBlur("password")}
                 />
                 <ErrorMessage
