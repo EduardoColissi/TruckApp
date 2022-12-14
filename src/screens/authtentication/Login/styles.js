@@ -13,16 +13,18 @@ export default styles = StyleSheet.create({
   formContainer:{
     marginTop: screenHeight * 0.2,
     width: screenWidth * 0.9,
-    height: screenHeight * 0.42,
+    height: screenHeight * 0.5,
   },
   buttonContainer: {
     margin: 18
   },
-  signupButton: {
+  loginButton: {
     color: "white",
     fontWeight: "300",
     fontSize: 18,
-    marginTop: screenHeight * 0.1,
     alignSelf: "center",
+  },
+  loginButtonContainer: {
+    marginTop: screenHeight * 0.2,
   }
 });

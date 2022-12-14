@@ -50,8 +50,7 @@ const Signup = ({ navigation }) => {
                         validationSchema={validationSchema}
                         onSubmit={async (data) => {
                             var statusCode;
-                            var userType = "user",
-                            statusCode = await signUp(data.name, data.cpf, data.password, userType);
+                            statusCode = await signUp(data.name, data.cpf, data.password);
                             if (statusCode === 401) setSignupError(true);
                             else if (statusCode === 200) setSignupError(false);
                         }}
@@ -66,7 +65,7 @@ const Signup = ({ navigation }) => {
                                     placeholder='Nome completo'
                                     autoCapitalize='none'
                                     onBlur={formikProps.handleBlur('name')}
-                                    leftIcon={{ type: 'font-awesome', name: 'user-circle-o' , color: 'white', size: 21}}
+                                    leftIcon={{ type: 'font-awesome', name: 'user-o' , color: 'white', size: 21}}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.name && formikProps.errors.name} />
                                 
@@ -123,8 +122,8 @@ const Signup = ({ navigation }) => {
                     </Formik>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.loginButton}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.signupButtonContainer}>
+                    <Text style={styles.signupButton}>
                         Já tem uma conta? <Text style={{ fontWeight: "bold" }}>Login</Text>
                     </Text>
                 </TouchableOpacity>
