@@ -59,12 +59,12 @@ const Routes = () => {
             //getting the acess token
             const response = await getToken(data);
 
-            //if everything is fine
+            //se tudo estiver certo, salva o token no local storage
             if (response.status === 200) {
-                //then save the token in local storage
                 token = response.data.token;
                 await SecureStore.setItemAsync("authorization", token);
             }
+            //se nao, retorna o erro
             else if (response.status === 401){
                 console.log("Wrong email or password");
             }
@@ -74,15 +74,16 @@ const Routes = () => {
             return response.status;
         },
         signOut: async () => {
+            //remove o token do local storage
             try {
                 await SecureStore.deleteItemAsync("authorization");
             } catch (error) {
                 console.log(error);
             }
 
-            dispatch({ type: "LOGOUT" });
+            dispatch({ type: "LOGOUT" }); 
         },
-        signUp: async (name, cpf, password, type) => {
+        signUp: async (name, cpf, password) => {
             let token;
             token = null;
 
@@ -92,11 +93,9 @@ const Routes = () => {
                 password: password,
             };
         
-            //getting the acess token
+            //pegando o token de acesso
             const response = await insertUser(data);
-            //if everything is fine
             if (response.status === 201) {
-                //then save the token in local storage
                 token = response.data.token;
                 await SecureStore.setItemAsync("authorization", token);
             }
@@ -132,7 +131,6 @@ const Routes = () => {
     }
 
     return (
-        //value={authContext} pass our auth functions to the other components
         <AuthContext.Provider value={authContext}>
             {authState.userToken !== null ? (
                 <UserNavigation />
