@@ -13,9 +13,9 @@ const CorelogLogo = () => {
 
 const styles = StyleSheet.create({
   logo: {
-    marginTop: 250,
-    width: screenWidth * 0.93,
-    height: screenHeight * 0.1,
+    marginBottom: screenHeight * 0.1,
+    width: screenWidth * 0.9,
+    height: screenHeight * 0.097,
   },
 });
 

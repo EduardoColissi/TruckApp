@@ -42,8 +42,8 @@ const Login = ({ navigation }) => {
       style={styles.container}
     >
       <KeyboardAwareScrollView>
-        <CorelogLogo />
         <View style={styles.formContainer}>
+        <CorelogLogo />
           <Formik
             initialValues={{ cpf: "", password: "" }}
             validationSchema={validationSchema}
@@ -111,8 +111,8 @@ const Login = ({ navigation }) => {
           </Formik>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-          <Text style={styles.signupButton}>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")} style={styles.loginButtonContainer}>
+          <Text style={styles.loginButton}>
             Não possui conta?{" "}
             <Text style={{ fontWeight: "bold" }}>Registre-se</Text>
           </Text>

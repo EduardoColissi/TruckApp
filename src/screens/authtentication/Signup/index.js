@@ -43,18 +43,14 @@ const Signup = ({ navigation }) => {
             style={styles.container}
         >
             <KeyboardAwareScrollView>
-                <CorelogLogo />
                 <View style={styles.formContainer}>
-                    <Text style={styles.formTitle}>
-                        Registre-se
-                    </Text>
+                <CorelogLogo />
                     <Formik
                         initialValues={{ name: '', cpf: '', password: '', passwordConfirmation: '' }}
                         validationSchema={validationSchema}
                         onSubmit={async (data) => {
                             var statusCode;
-                            var userType = "user",
-                            statusCode = await signUp(data.name, data.cpf, data.password, userType);
+                            statusCode = await signUp(data.name, data.cpf, data.password);
                             if (statusCode === 401) setSignupError(true);
                             else if (statusCode === 200) setSignupError(false);
                         }}
@@ -69,6 +65,7 @@ const Signup = ({ navigation }) => {
                                     placeholder='Nome completo'
                                     autoCapitalize='none'
                                     onBlur={formikProps.handleBlur('name')}
+                                    leftIcon={{ type: 'font-awesome', name: 'user-o' , color: 'white', size: 21}}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.name && formikProps.errors.name} />
                                 
@@ -80,8 +77,9 @@ const Signup = ({ navigation }) => {
                                     label='CPF'
                                     autoCapitalize='none'
                                     onBlur={formikProps.handleBlur('cpf')}
+                                    leftIcon={{ type: 'font-awesome', name: 'user-circle-o' , color: 'white', size: 21}}
                                 />                                
-                                <ErrorMessage errorValue={formikProps.touched.surname && formikProps.errors.surname} />
+                                <ErrorMessage errorValue={formikProps.touched.cpf && formikProps.errors.cpf} />
 
                                 <FormInput
                                     name='password'
@@ -91,6 +89,7 @@ const Signup = ({ navigation }) => {
                                     label='Senha'
                                     secureTextEntry
                                     onBlur={formikProps.handleBlur('password')}
+                                    leftIcon={{ type: 'font-awesome', name: 'lock' , color: 'white', size: 21}}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.password && formikProps.errors.password} />
 
@@ -102,6 +101,7 @@ const Signup = ({ navigation }) => {
                                     label='Confirmação de senha'
                                     secureTextEntry
                                     onBlur={formikProps.handleBlur('passwordConfirmation')}
+                                    leftIcon={{ type: 'font-awesome', name: 'lock' , color: 'white', size: 21}}
                                 />
                                 <ErrorMessage errorValue={formikProps.touched.passwordConfirmation && formikProps.errors.passwordConfirmation} />
 
@@ -112,7 +112,7 @@ const Signup = ({ navigation }) => {
 
                                 <View style={styles.buttonContainer}>
                                     <FormButton
-                                        title='Registrar'
+                                        title='Registrar Conta'
                                         onPress={formikProps.submitForm}
                                         disabled={!formikProps.isValid}
                                     />
@@ -122,8 +122,8 @@ const Signup = ({ navigation }) => {
                     </Formik>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.loginButton}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.signupButtonContainer}>
+                    <Text style={styles.signupButton}>
                         Já tem uma conta? <Text style={{ fontWeight: "bold" }}>Login</Text>
                     </Text>
                 </TouchableOpacity>

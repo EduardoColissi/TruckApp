@@ -5,13 +5,14 @@ import * as SecureStore from 'expo-secure-store';
 import AuthNavigation from './navigation/AuthNavigation';
 import UserNavigation from './navigation/UserNavigation';
 
+import Loading from './components/Loading';
+
 import { AuthContext } from './components/Context';
 import { getToken, insertUser } from './auth';
 
 const Routes = () => {
     const initialAuthState = {
         userToken: null,
-        userType: null,
         isLoading: true,
     };
 
@@ -21,28 +22,24 @@ const Routes = () => {
                 return {
                     ...prevState,
                     userToken: action.userToken,
-                    userType: action.userType,
                     isLoading: false,
                 };
             case 'LOGIN':
                 return {
                     ...prevState,
                     userToken: action.userToken,
-                    userType: action.userType,
                     isLoading: false,
                 };
             case 'LOGOUT':
                 return {
                     ...prevState,
                     userToken: null,
-                    userType: null,
                     isLoading: false,
                 };
             case 'SIGNUP':
                 return {
                     ...prevState,
                     userToken: action.userToken,
-                    userType: action.userType,
                     isLoading: false,
                 };
         }
@@ -55,73 +52,58 @@ const Routes = () => {
             let token;
             token = null;
 
-            let user_type;
-            user_type = null;
-
             let data = {
                 cpf: cpf,
                 password: password,
             };
-        
             //getting the acess token
             const response = await getToken(data);
-        
-            //if everything is fine
+
+            //se tudo estiver certo, salva o token no local storage
             if (response.status === 200) {
-                //then save the token in local storage
-                token = response.data.acess_token;
-                user_type = response.data.user_type;
+                token = response.data.token;
                 await SecureStore.setItemAsync("authorization", token);
-                await SecureStore.setItemAsync("user_type", user_type);
             }
+            //se nao, retorna o erro
             else if (response.status === 401){
                 console.log("Wrong email or password");
             }
             
-            dispatch({ type: "LOGIN", userToken: token, userType: user_type });
+            dispatch({ type: "LOGIN", userToken: token });
 
             return response.status;
         },
         signOut: async () => {
+            //remove o token do local storage
             try {
                 await SecureStore.deleteItemAsync("authorization");
-                await SecureStore.deleteItemAsync("user_type");
             } catch (error) {
                 console.log(error);
             }
 
-            dispatch({ type: "LOGOUT" });
+            dispatch({ type: "LOGOUT" }); 
         },
-        signUp: async (name, cpf, password, type) => {
+        signUp: async (name, cpf, password) => {
             let token;
             token = null;
-
-            let user_type;
-            user_type = null;
 
             let data = {
                 name: name,
                 cpf: cpf,
                 password: password,
-                type: type,
             };
         
-            //getting the acess token
+            //pegando o token de acesso
             const response = await insertUser(data);
-        
-            //if everything is fine
-            if (response.status === 200) {
-                //then save the token in local storage
-                token = response.data.acess_token;
-                user_type = response.data.user_type;
+            if (response.status === 201) {
+                token = response.data.token;
                 await SecureStore.setItemAsync("authorization", token);
-                await SecureStore.setItemAsync("user_type", user_type);
             }
-            else if (response.status === 42){
-                console.log("Email already in use");
+            else {
+                console.log("CPF já em uso. Tente outro.");
             }
             
-            dispatch({ type: "SIGNUP", userToken: token, userType: user_type });
+            dispatch({ type: "SIGNUP", userToken: token });
 
             return response.status;
         },
@@ -132,37 +114,26 @@ const Routes = () => {
             let token;
             token = null;
 
-            let user_type;
-            user_type = null;
-
             try {
                 token = await SecureStore.getItemAsync("authorization");
-                user_type = await SecureStore.getItemAsync("user_type");
             } catch(error){
                 console.log(error);
             }
 
-            dispatch({type: "RETRIEVE_TOKEN", userToken: token, userType: user_type });
+            dispatch({type: "RETRIEVE_TOKEN", userToken: token });
         }, 500);
     }, []);
 
     if (authState.isLoading) {
         return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <ActivityIndicator size="large" />
-            </View>
+            <Loading />
         );
     }
 
     return (
-        //value={authContext} pass our auth functions to the other components
         <AuthContext.Provider value={authContext}>
             {authState.userToken !== null ? (
-                authState.userType === "administrator" ? (
-                    <AdmNavigation />
-                ) : (
-                    <UserNavigation />
-                )
+                <UserNavigation />
             ) : ( 
                 <AuthNavigation /> 
             )}
