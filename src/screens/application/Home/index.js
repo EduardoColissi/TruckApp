@@ -13,14 +13,12 @@ const Home = () => {
             <Text>
                 This is the USER Home screen!
             </Text>
-
-            <Button
+            <Button 
                 title="SignOut"
                 onPress={() => {signOut()}}
                 titleStyle={{ color: '#F57C00' }}
                 type='clear'
             />
-
         </View>
     );
 }

@@ -56,7 +56,6 @@ const Routes = () => {
                 cpf: cpf,
                 password: password,
             };
-            //getting the acess token
             const response = await getToken(data);
 
             //se tudo estiver certo, salva o token no local storage
