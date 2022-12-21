@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import CustomDrawer from "../components/CustomDrawer";
 import Dashboard from "../screens/application/Dashboard";
@@ -15,20 +15,54 @@ export default function UserNavigation() {
       <Drawer.Navigator
         initialRouteName="Dashboard"
         drawerContent={(props) => <CustomDrawer {...props} />}
-        screenOptions={{ headerStyle: styles.headerStyle }}
+        screenOptions={{
+          headerStyle: styles.headerStyle,
+          drawerLabelStyle: {
+            marginLeft: -25,
+            fontFamily: "Roboto-Medium",
+            fontSize: 16,
+          },
+          drawerActiveBackgroundColor: "#3e870b",
+          drawerActiveTintColor: "#fff",
+          headerTintColor: "#fff",
+        }}
       >
         <Drawer.Screen
           name="Dashboard"
           component={Dashboard}
           options={{
             drawerIcon: ({ color }) => (
-              <Ionicons name="home-outline" size={22} color={color} />
+              <FontAwesome5 name="home" size={22} color={color} />
             ),
           }}
         />
-        <Drawer.Screen name="Fretes" component={Dashboard} />
-        <Drawer.Screen name="Meus fretes" component={Dashboard} />
-        <Drawer.Screen name="Perfil" component={Dashboard} />
+        <Drawer.Screen
+          name="Fretes"
+          component={Dashboard}
+          options={{
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="truck" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Meus fretes"
+          component={Dashboard}
+          options={{
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="truck-loading" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Perfil"
+          component={Dashboard}
+          options={{
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="user-alt" size={22} color={color} />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

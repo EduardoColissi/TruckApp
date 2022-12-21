@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Routes from './src/index';
+import Routes from "./src/index";
 import Loading from "./src/components/Loading";
 import { StyleSheet } from "react-native";
 
@@ -10,18 +10,10 @@ export default function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 6000);
+    }, 4500);
   }, []);
 
-  return (
-    <>
-      {loading ? (
-        <Loading visible={loading} />
-      ) : (
-        <Routes />
-      )}
-    </>
-  );
+  return <>{loading ? <Loading visible={loading} /> : <Routes />}</>;
 }
 
 const styles = StyleSheet.create({

@@ -21,7 +21,7 @@ const CustomDrawer = (props) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      <View>
+      <View style={styles.footer}>
         <Text>Logout</Text>
       </View>
     </View>
@@ -50,5 +50,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffff",
     paddingTop: 10,
+  },
+  footer: {
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: "#ccc",
   },
 });
