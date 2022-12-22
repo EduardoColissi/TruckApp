@@ -1,11 +1,10 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
-    dashboard: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#FF5E42",
-    }
+  dashboard: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

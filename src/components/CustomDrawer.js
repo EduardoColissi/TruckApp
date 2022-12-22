@@ -1,12 +1,22 @@
-import React from "react";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
+import { AuthContext } from "./Context";
 
 const CustomDrawer = (props) => {
+  const { signOut } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -22,7 +32,17 @@ const CustomDrawer = (props) => {
         </View>
       </DrawerContentScrollView>
       <View style={styles.footer}>
-        <Text>Logout</Text>
+        <TouchableOpacity
+          onPress={() => {
+            signOut();
+          }}
+          style={styles.signoutContainer}
+        >
+          <View style={styles.signoutRow}>
+            <FontAwesome5 name="power-off" size={20} />
+            <Text style={styles.footerText}>Logout</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -55,5 +75,16 @@ const styles = StyleSheet.create({
     padding: 20,
     borderTopWidth: 1,
     borderTopColor: "#ccc",
+  },
+  footerText: {
+    fontSize: 15,
+    marginLeft: 5,
+  },
+  signoutContainer: {
+    paddingVertical: 18,
+  },
+  signoutRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

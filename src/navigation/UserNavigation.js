@@ -19,7 +19,6 @@ export default function UserNavigation() {
           headerStyle: styles.headerStyle,
           drawerLabelStyle: {
             marginLeft: -25,
-            fontFamily: "Roboto-Medium",
             fontSize: 16,
           },
           drawerActiveBackgroundColor: "#3e870b",
@@ -28,11 +27,11 @@ export default function UserNavigation() {
         }}
       >
         <Drawer.Screen
-          name="Dashboard"
+          name="Painel"
           component={Dashboard}
           options={{
             drawerIcon: ({ color }) => (
-              <FontAwesome5 name="home" size={22} color={color} />
+              <FontAwesome5 name="tachometer-alt" size={22} color={color} />
             ),
           }}
         />
