@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-import styles from "./styles";
-
-const Dashboard = () => {
+const Marketplace = () => {
   return (
     <View style={styles.screen}>
-      <Text>Dashboard</Text>
+      <Text>Marketplace</Text>
     </View>
   );
 };
 
-export default Dashboard;
+export default Marketplace;

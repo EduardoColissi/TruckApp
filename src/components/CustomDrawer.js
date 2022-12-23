@@ -24,7 +24,7 @@ const CustomDrawer = (props) => {
         contentContainerStyle={styles.content}
       >
         <ImageBackground
-          source={require("../public/LogoCorelogAmarelo.png")}
+          source={require("../public/LogoCorelogBranco.png")}
           style={styles.logo}
         />
         <View style={styles.itemlist}>

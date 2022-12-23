@@ -40,7 +40,7 @@ export default function UserNavigation() {
           component={Dashboard}
           options={{
             drawerIcon: ({ color }) => (
-              <FontAwesome5 name="truck" size={22} color={color} />
+              <FontAwesome5 name="shipping-fast" size={22} color={color} />
             ),
           }}
         />
@@ -50,6 +50,15 @@ export default function UserNavigation() {
           options={{
             drawerIcon: ({ color }) => (
               <FontAwesome5 name="truck-loading" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Loja"
+          component={Dashboard}
+          options={{
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="store-alt" size={22} color={color} />
             ),
           }}
         />
