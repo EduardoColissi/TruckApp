@@ -1,35 +1,29 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 
-import { LinearGradient } from 'expo-linear-gradient';
+import Theme from "../utils/globalTheme";
 
 //Botão para formulário, que pode ser reutilizado de forma dinâmica
 const FormButton = ({ title, buttonType, ...rest }) => (
-  <LinearGradient 
-    colors={['#8fc223', '#7eb806']} 
-    start={[0, 0]} 
-    end={[1, 0]}
-    style={{borderRadius:20}}
-  >
-    <Button
-      {...rest}
-      type={buttonType}
-      title={title}
-      buttonStyle={styles.formButton}
-      titleStyle={styles.formButtonTitle}
-    />
-  </LinearGradient> 
-)
+  <Button
+    {...rest}
+    type={buttonType}
+    title={title}
+    buttonStyle={styles.formButton}
+    titleStyle={styles.formButtonTitle}
+  />
+);
 
 const styles = StyleSheet.create({
   formButton: {
-    backgroundColor: "transparent",
+    backgroundColor: Theme.ButtonColor,
+    borderRadius: 20,
   },
   formButtonTitle: {
-    color: "white",
+    color: Theme.White,
     fontWeight: "300",
-  }
+  },
 });
-  
-  export default FormButton;
+
+export default FormButton;
