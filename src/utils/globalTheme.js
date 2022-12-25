@@ -8,6 +8,8 @@ const Theme = {
   BackgroungGradienteColorTwo: "#015494",
   White: "#fff",
   Black: "#000",
+  ErrorColor: "#ff0000",
+  LightGray: "#ccc",
 };
 
 export default Theme;

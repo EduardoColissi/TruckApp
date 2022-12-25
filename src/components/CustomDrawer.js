@@ -12,6 +12,8 @@ import {
 } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+import Theme from "../utils/globalTheme";
+
 import { AuthContext } from "./Context";
 
 const CustomDrawer = (props) => {
@@ -40,7 +42,7 @@ const CustomDrawer = (props) => {
         >
           <View style={styles.signoutRow}>
             <FontAwesome5 name="power-off" size={20} />
-            <Text style={styles.footerText}>Logout</Text>
+            <Text style={styles.footerText}>Desconectar</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    backgroundColor: "#357309",
+    backgroundColor: Theme.PrimaryColor,
   },
   logo: {
     padding: 33,
@@ -68,13 +70,13 @@ const styles = StyleSheet.create({
   },
   itemlist: {
     flex: 1,
-    backgroundColor: "#ffff",
+    backgroundColor: Theme.White,
     paddingTop: 10,
   },
   footer: {
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: "#ccc",
+    borderTopColor: Theme.LightGray,
   },
   footerText: {
     fontSize: 15,

@@ -5,6 +5,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import CustomDrawer from "../components/CustomDrawer";
+import Theme from "../utils/globalTheme";
 
 //import das telas
 import Dashboard from "../screens/application/Dashboard";
@@ -27,9 +28,9 @@ export default function UserNavigation() {
             marginLeft: -25,
             fontSize: 16,
           },
-          drawerActiveBackgroundColor: "#3e870b",
-          drawerActiveTintColor: "#fff",
-          headerTintColor: "#fff",
+          drawerActiveBackgroundColor: Theme.PrimaryColor,
+          drawerActiveTintColor: Theme.White,
+          headerTintColor: Theme.White,
         }}
       >
         <Drawer.Screen
@@ -84,6 +85,6 @@ export default function UserNavigation() {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor: "#357309",
+    backgroundColor: Theme.PrimaryColor,
   },
 });
