@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -47,138 +47,144 @@ const Signup = ({ navigation }) => {
       end={[0, 1]}
       style={styles.container}
     >
-      <KeyboardAwareScrollView>
-        <View style={styles.formContainer}>
-          <CorelogLogo />
-          <Formik
-            initialValues={{
-              name: "",
-              cpf: "",
-              password: "",
-              passwordConfirmation: "",
-            }}
-            validationSchema={validationSchema}
-            onSubmit={async (data) => {
-              var statusCode;
-              statusCode = await signUp(data.name, data.cpf, data.password);
-              if (statusCode === 401) setSignupError(true);
-              else if (statusCode === 200) setSignupError(false);
-            }}
-          >
-            {(formikProps) => (
-              <Fragment>
-                <FormInput
-                  name="name"
-                  value={formikProps.name}
-                  onChangeText={formikProps.handleChange("name")}
-                  label="Nome"
-                  placeholder="Nome completo"
-                  autoCapitalize="none"
-                  onBlur={formikProps.handleBlur("name")}
-                  leftIcon={{
-                    type: "font-awesome",
-                    name: "user-o",
-                    color: Theme.White,
-                    size: 21,
-                  }}
-                />
-                <ErrorMessage
-                  errorValue={
-                    formikProps.touched.name && formikProps.errors.name
-                  }
-                />
-
-                <FormInput
-                  name="cpf"
-                  value={formikProps.cpf}
-                  onChangeText={formikProps.handleChange("cpf")}
-                  placeholder="Seu CPF"
-                  label="CPF"
-                  autoCapitalize="none"
-                  onBlur={formikProps.handleBlur("cpf")}
-                  leftIcon={{
-                    type: "font-awesome",
-                    name: "user-circle-o",
-                    color: Theme.White,
-                    size: 21,
-                  }}
-                />
-                <ErrorMessage
-                  errorValue={formikProps.touched.cpf && formikProps.errors.cpf}
-                />
-
-                <FormInput
-                  name="password"
-                  value={formikProps.password}
-                  onChangeText={formikProps.handleChange("password")}
-                  placeholder="Sua senha"
-                  label="Senha"
-                  secureTextEntry
-                  onBlur={formikProps.handleBlur("password")}
-                  leftIcon={{
-                    type: "font-awesome",
-                    name: "lock",
-                    color: Theme.White,
-                    size: 21,
-                  }}
-                />
-                <ErrorMessage
-                  errorValue={
-                    formikProps.touched.password && formikProps.errors.password
-                  }
-                />
-
-                <FormInput
-                  name="passwordConfirmation"
-                  value={formikProps.passwordConfirmation}
-                  onChangeText={formikProps.handleChange(
-                    "passwordConfirmation"
-                  )}
-                  placeholder="Repita sua senha"
-                  label="Confirmação de senha"
-                  secureTextEntry
-                  onBlur={formikProps.handleBlur("passwordConfirmation")}
-                  leftIcon={{
-                    type: "font-awesome",
-                    name: "lock",
-                    color: Theme.White,
-                    size: 21,
-                  }}
-                />
-                <ErrorMessage
-                  errorValue={
-                    formikProps.touched.passwordConfirmation &&
-                    formikProps.errors.passwordConfirmation
-                  }
-                />
-
-                {SignupError === true ? (
-                  <ErrorMessage errorValue="CPF ou Senha inválidos." />
-                ) : (
-                  <View />
-                )}
-
-                <View style={styles.buttonContainer}>
-                  <FormButton
-                    title="Registrar Conta"
-                    onPress={formikProps.submitForm}
-                    disabled={!formikProps.isValid}
+      <ScrollView>
+        <KeyboardAwareScrollView>
+          <View style={styles.formContainer}>
+            <CorelogLogo />
+            <Formik
+              initialValues={{
+                name: "",
+                cpf: "",
+                password: "",
+                passwordConfirmation: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={async (data) => {
+                var statusCode;
+                statusCode = await signUp(data.name, data.cpf, data.password);
+                if (statusCode === 401) setSignupError(true);
+                else if (statusCode === 200) setSignupError(false);
+              }}
+            >
+              {(formikProps) => (
+                <Fragment>
+                  <FormInput
+                    name="name"
+                    value={formikProps.name}
+                    onChangeText={formikProps.handleChange("name")}
+                    label="Nome"
+                    placeholder="Nome completo"
+                    autoCapitalize="none"
+                    onBlur={formikProps.handleBlur("name")}
+                    leftIcon={{
+                      type: "font-awesome",
+                      name: "user-o",
+                      color: Theme.White,
+                      size: 21,
+                    }}
                   />
-                </View>
-              </Fragment>
-            )}
-          </Formik>
-        </View>
+                  <ErrorMessage
+                    errorValue={
+                      formikProps.touched.name && formikProps.errors.name
+                    }
+                  />
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login")}
-          style={styles.signupButtonContainer}
-        >
-          <Text style={styles.signupButton}>
-            Já tem uma conta? <Text style={{ fontWeight: "bold" }}>Login</Text>
-          </Text>
-        </TouchableOpacity>
-      </KeyboardAwareScrollView>
+                  <FormInput
+                    name="cpf"
+                    value={formikProps.cpf}
+                    onChangeText={formikProps.handleChange("cpf")}
+                    placeholder="Seu CPF"
+                    label="CPF"
+                    autoCapitalize="none"
+                    onBlur={formikProps.handleBlur("cpf")}
+                    leftIcon={{
+                      type: "font-awesome",
+                      name: "user-circle-o",
+                      color: Theme.White,
+                      size: 21,
+                    }}
+                  />
+                  <ErrorMessage
+                    errorValue={
+                      formikProps.touched.cpf && formikProps.errors.cpf
+                    }
+                  />
+
+                  <FormInput
+                    name="password"
+                    value={formikProps.password}
+                    onChangeText={formikProps.handleChange("password")}
+                    placeholder="Sua senha"
+                    label="Senha"
+                    secureTextEntry
+                    onBlur={formikProps.handleBlur("password")}
+                    leftIcon={{
+                      type: "font-awesome",
+                      name: "lock",
+                      color: Theme.White,
+                      size: 21,
+                    }}
+                  />
+                  <ErrorMessage
+                    errorValue={
+                      formikProps.touched.password &&
+                      formikProps.errors.password
+                    }
+                  />
+
+                  <FormInput
+                    name="passwordConfirmation"
+                    value={formikProps.passwordConfirmation}
+                    onChangeText={formikProps.handleChange(
+                      "passwordConfirmation"
+                    )}
+                    placeholder="Repita sua senha"
+                    label="Confirmação de senha"
+                    secureTextEntry
+                    onBlur={formikProps.handleBlur("passwordConfirmation")}
+                    leftIcon={{
+                      type: "font-awesome",
+                      name: "lock",
+                      color: Theme.White,
+                      size: 21,
+                    }}
+                  />
+                  <ErrorMessage
+                    errorValue={
+                      formikProps.touched.passwordConfirmation &&
+                      formikProps.errors.passwordConfirmation
+                    }
+                  />
+
+                  {SignupError === true ? (
+                    <ErrorMessage errorValue="CPF ou Senha inválidos." />
+                  ) : (
+                    <View />
+                  )}
+
+                  <View style={styles.buttonContainer}>
+                    <FormButton
+                      title="Registrar Conta"
+                      onPress={formikProps.submitForm}
+                      disabled={!formikProps.isValid}
+                    />
+                  </View>
+                </Fragment>
+              )}
+            </Formik>
+          </View>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Login")}
+            style={styles.signinButtonContainer}
+          >
+            <Text style={styles.signinButton}>
+              Já tem uma conta?{" "}
+              <Text style={{ fontWeight: "bold" }}>Entre</Text>
+            </Text>
+          </TouchableOpacity>
+        </KeyboardAwareScrollView>
+      </ScrollView>
     </LinearGradient>
   );
 };

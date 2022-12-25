@@ -16,9 +16,6 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     marginTop: -15,
-    marginBottom: 5,
-    borderRadius: 4,
-    backgroundColor: Theme.TertiaryColor,
   },
   errorText: {
     color: Theme.ErrorColor,
