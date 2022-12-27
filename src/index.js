@@ -60,13 +60,13 @@ const Routes = () => {
         const response = await getToken(data);
 
         //se tudo estiver certo, salva o token no local storage
-        if (response.status === 200) {
+        if (response.status === 201) {
           token = response.data.token;
           await SecureStore.setItemAsync("authorization", token);
         }
         //se nao, retorna o erro
         else if (response.status === 401) {
-          console.log("Wrong email or password");
+          console.log("Wrong cpf or password");
         }
 
         dispatch({ type: "LOGIN", userToken: token });
@@ -95,7 +95,7 @@ const Routes = () => {
 
         //pegando o token de acesso
         const response = await insertUser(data);
-        console.log(response);
+        console.log(response, data, "response1");
         if (response.status === 200) {
           token = response.data.token;
           await SecureStore.setItemAsync("authorization", token);

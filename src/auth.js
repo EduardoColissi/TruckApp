@@ -12,17 +12,10 @@ export async function getToken(data) {
 }
 
 export async function insertUser(data) {
-  const headers = {
-    Accept: "application/json",
-    "Content-type": "application/json",
-    "access-control-allow-origin": "*",
-  };
-
+  console.log(data);
   try {
-    const response = await api.post("/users/signup", data, {
-      headers: headers,
-    });
-
+    const response = await api.post("/users/signup", data);
+    console.log("teste");
     return response;
   } catch (err) {
     return err.response;

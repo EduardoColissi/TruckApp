@@ -1,14 +1,10 @@
 import React from "react";
-import { View, Text } from "react-native";
+import PointsCard from "../../../components/PointsCard";
 
 import styles from "./styles";
 
 const Dashboard = () => {
-  return (
-    <View style={styles.screen}>
-      <Text>Dashboard</Text>
-    </View>
-  );
+  return <PointsCard />;
 };
 
 export default Dashboard;
