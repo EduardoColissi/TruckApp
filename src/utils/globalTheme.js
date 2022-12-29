@@ -9,7 +9,7 @@ const Theme = {
   White: "#fff",
   Black: "#000",
   ErrorColor: "#ff0000",
-  LightGray: "#ccc",
+  ShadowColor: "#ccc",
 };
 
 export default Theme;

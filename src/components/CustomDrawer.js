@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   footer: {
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: Theme.LightGray,
+    borderTopColor: Theme.ShadowColor,
   },
   footerText: {
     fontSize: 15,
