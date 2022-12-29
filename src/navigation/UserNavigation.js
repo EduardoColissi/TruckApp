@@ -5,7 +5,14 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import CustomDrawer from "../components/CustomDrawer";
+import Theme from "../utils/globalTheme";
+
+//import das telas
 import Dashboard from "../screens/application/Dashboard";
+import Freights from "../screens/application/Freights";
+import MyFreights from "../screens/application/MyFreights";
+import Marketplace from "../screens/application/Marketplace";
+import Profile from "../screens/application/Profile";
 
 const Drawer = createDrawerNavigator();
 
@@ -21,9 +28,9 @@ export default function UserNavigation() {
             marginLeft: -25,
             fontSize: 16,
           },
-          drawerActiveBackgroundColor: "#3e870b",
-          drawerActiveTintColor: "#fff",
-          headerTintColor: "#fff",
+          drawerActiveBackgroundColor: Theme.PrimaryColor,
+          drawerActiveTintColor: Theme.White,
+          headerTintColor: Theme.White,
         }}
       >
         <Drawer.Screen
@@ -37,16 +44,16 @@ export default function UserNavigation() {
         />
         <Drawer.Screen
           name="Fretes"
-          component={Dashboard}
+          component={Freights}
           options={{
             drawerIcon: ({ color }) => (
-              <FontAwesome5 name="truck" size={22} color={color} />
+              <FontAwesome5 name="shipping-fast" size={22} color={color} />
             ),
           }}
         />
         <Drawer.Screen
           name="Meus fretes"
-          component={Dashboard}
+          component={MyFreights}
           options={{
             drawerIcon: ({ color }) => (
               <FontAwesome5 name="truck-loading" size={22} color={color} />
@@ -54,8 +61,17 @@ export default function UserNavigation() {
           }}
         />
         <Drawer.Screen
+          name="Loja"
+          component={Marketplace}
+          options={{
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="store-alt" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
           name="Perfil"
-          component={Dashboard}
+          component={Profile}
           options={{
             drawerIcon: ({ color }) => (
               <FontAwesome5 name="user-alt" size={22} color={color} />
@@ -69,6 +85,6 @@ export default function UserNavigation() {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor: "#357309",
+    backgroundColor: Theme.PrimaryColor,
   },
 });

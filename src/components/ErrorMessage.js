@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import Theme from "../utils/globalTheme";
+
 //Mensagem de erro dinâmica
 const ErrorMessage = ({ errorValue }) => {
   return (
@@ -12,12 +14,12 @@ const ErrorMessage = ({ errorValue }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 25,
+    marginHorizontal: 20,
     marginTop: -15,
-    marginBottom: 5,
   },
   errorText: {
-    color: "red",
+    color: Theme.ErrorColor,
+    fontSize: 14,
   },
 });
 
