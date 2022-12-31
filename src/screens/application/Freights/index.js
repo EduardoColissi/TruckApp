@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
 import api from "../../../services/api";
@@ -25,14 +25,22 @@ const Freights = () => {
     };
     getFreights();
   }, []);
-  console.log(loading);
+
   return loading ? (
     <Loading visible={loading} />
   ) : (
     <View style={styles.screen}>
-      <FreightCard>
-        <Text style={styles.freightTitle}>Frete - 01</Text>
-      </FreightCard>
+      <ScrollView>
+        {freights.map((freight) => (
+          <TouchableOpacity key={freight.id}>
+            <FreightCard>
+              <Text style={styles.freightTitle}>{freight.code}</Text>
+              <Text>{freight.description}</Text>
+              <Text>R$ {freight.value}</Text>
+            </FreightCard>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
