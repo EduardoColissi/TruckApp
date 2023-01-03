@@ -10,21 +10,20 @@ import FreightFilterButton from "../../../components/FreightFilterButton";
 
 const Freights = () => {
   const [freights, setFreights] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const getFreights = async () => {
+    try {
+      const data = await api.get("/freights/all").then((res) => {
+        setFreights(res.data);
+      });
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const getFreights = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get("/freights/all");
-        setFreights(response.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-      console.log(freights);
-    };
     getFreights();
   }, []);
 
