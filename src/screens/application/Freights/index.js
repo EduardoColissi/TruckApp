@@ -2,29 +2,35 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Button } from "react-native";
 import styles from "./styles";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useFocusEffect } from "@react-navigation/native";
+
 import api from "../../../services/api";
 
 import Loading from "../../../components/Loading";
 import FreightCard from "../../../components/FreightCard";
 import FreightFilterButton from "../../../components/FreightFilterButton";
 
-const Freights = () => {
+const Freights = ({ navigation }) => {
   const [freights, setFreights] = useState();
   const [loading, setLoading] = useState(true);
 
   const getFreights = async () => {
+    setLoading(true);
     try {
       const data = await api.get("/freights/all").then((res) => {
         setFreights(res.data);
+        setLoading(false);
       });
-      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getFreights();
+    navigation.addListener("focus", () => {
+      getFreights();
+    });
   }, []);
 
   return loading ? (
@@ -47,8 +53,13 @@ const Freights = () => {
       </View>
       <ScrollView>
         {freights.map((freight) => (
-          <TouchableOpacity key={freight.id}>
-            <FreightCard>
+          <TouchableOpacity
+            key={freight.id}
+            onPress={() => {
+              navigation.navigate("Frete", { id: freight.id });
+            }}
+          >
+            <FreightCard key={freight.id}>
               <Text style={styles.freightTitle}>{freight.code}</Text>
               <Text>Valor: R$ {freight.value}</Text>
               <View style={{ flexDirection: "row" }}>

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import CustomDrawer from "../components/CustomDrawer";
@@ -13,6 +14,7 @@ import Freights from "../screens/application/Freights";
 import MyFreights from "../screens/application/MyFreights";
 import Marketplace from "../screens/application/Marketplace";
 import Profile from "../screens/application/Profile";
+import FreightDetails from "../screens/application/FreightDetails";
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +52,7 @@ export default function UserNavigation() {
               <FontAwesome5 name="shipping-fast" size={22} color={color} />
             ),
           }}
+          initialParams={{ id: undefined }}
         />
         <Drawer.Screen
           name="Meus fretes"
@@ -76,6 +79,13 @@ export default function UserNavigation() {
             drawerIcon: ({ color }) => (
               <FontAwesome5 name="user-alt" size={22} color={color} />
             ),
+          }}
+        />
+        <Drawer.Screen
+          name="Frete"
+          component={FreightDetails}
+          options={{
+            drawerItemStyle: { height: 0 },
           }}
         />
       </Drawer.Navigator>
