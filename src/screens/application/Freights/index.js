@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Button } from "react-native";
 import styles from "./styles";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { useFocusEffect } from "@react-navigation/native";
 
 import api from "../../../services/api";
 

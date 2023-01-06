@@ -5,6 +5,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import api from "../../../services/api";
 
 import Loading from "../../../components/Loading";
+import FreightDetailsCard from "../../../components/FreigthDetailsCard";
 
 const FreightDetails = ({ route }) => {
   const { id } = route.params;
@@ -33,7 +34,7 @@ const FreightDetails = ({ route }) => {
   } else if (freight != undefined) {
     return (
       <View>
-        <Text>{freight.code}</Text>
+        <FreightDetailsCard item={freight} />
       </View>
     );
   } else {

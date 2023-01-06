@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 import Theme from "../utils/globalTheme";
 
