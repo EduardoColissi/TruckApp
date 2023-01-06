@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Button } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import styles from "./styles";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -35,7 +41,7 @@ const Freights = ({ navigation }) => {
   return loading ? (
     <Loading visible={loading} />
   ) : (
-    <View>
+    <>
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
         <FreightFilterButton
           title="Nacional"
@@ -50,31 +56,33 @@ const Freights = ({ navigation }) => {
           }}
         />
       </View>
-      <ScrollView>
-        {freights.map((freight) => (
-          <TouchableOpacity
-            key={freight.id}
-            onPress={() => {
-              navigation.navigate("Frete", { id: freight.id });
-            }}
-          >
-            <FreightCard key={freight.id}>
-              <Text style={styles.freightTitle}>{freight.code}</Text>
-              <Text>Valor: R$ {freight.value}</Text>
-              <View style={{ flexDirection: "row" }}>
-                <Text>Pontos: </Text>
-                <Text>{freight.points} </Text>
-                <FontAwesome5 name="coins" size={15} />
-              </View>
-              <Text>Origem: {freight.origin}</Text>
-              <Text>Destino: {freight.destiny}</Text>
-              <Text>Data de coleta: {freight.date}</Text>
-              <Text>Data de entrega: {freight.deadline}</Text>
-            </FreightCard>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </View>
+      <SafeAreaView>
+        <ScrollView>
+          {freights.map((freight) => (
+            <TouchableOpacity
+              key={freight.id}
+              onPress={() => {
+                navigation.navigate("Frete", { id: freight.id });
+              }}
+            >
+              <FreightCard key={freight.id}>
+                <Text style={styles.freightTitle}>{freight.code}</Text>
+                <Text>Valor: R$ {freight.value}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Pontos: </Text>
+                  <Text>{freight.points} </Text>
+                  <FontAwesome5 name="coins" size={15} />
+                </View>
+                <Text>Origem: {freight.origin}</Text>
+                <Text>Destino: {freight.destiny}</Text>
+                <Text>Data de coleta: {freight.date}</Text>
+                <Text>Data de entrega: {freight.deadline}</Text>
+              </FreightCard>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 

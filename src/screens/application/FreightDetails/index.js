@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, Text } from "react-native";
+import { ScrollView, Text, SafeAreaView } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import api from "../../../services/api";
@@ -33,9 +33,11 @@ const FreightDetails = ({ route }) => {
     return <Loading visible={loading} />;
   } else if (freight != undefined) {
     return (
-      <View>
-        <FreightDetailsCard item={freight} />
-      </View>
+      <SafeAreaView>
+        <ScrollView>
+          <FreightDetailsCard item={freight} />
+        </ScrollView>
+      </SafeAreaView>
     );
   } else {
     return <Text>Frete não encontrado</Text>;

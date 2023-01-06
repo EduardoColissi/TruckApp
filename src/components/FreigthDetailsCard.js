@@ -11,7 +11,7 @@ const FreightDetailsCard = ({ item }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.code}>Frete - {item.code}</Text>
-      <View style={styles.div}>
+      <View style={styles.divWithoutBorder}>
         <Text style={styles.boldText}>Detalhes: </Text>
         <Text style={styles.normalText}>{item.description}</Text>
         <Text style={styles.normalText}>Valor: R$ {item.value}</Text>
@@ -21,7 +21,7 @@ const FreightDetailsCard = ({ item }) => {
         </View>
       </View>
       <View style={styles.div}>
-        <Text style={styles.boldText}>Dados da coleta</Text>
+        <Text style={styles.boldText}>Coleta:</Text>
         <Text style={styles.normalText}>Data: {item.date}</Text>
         <Text style={styles.normalText}>Endereço de coleta:</Text>
         <Text style={styles.normalText}>Rua Firmiano Osório, nº 33,</Text>
@@ -31,7 +31,7 @@ const FreightDetailsCard = ({ item }) => {
         </Text>
       </View>
       <View style={styles.div}>
-        <Text style={styles.boldText}>Dados da entrega</Text>
+        <Text style={styles.boldText}>Entrega:</Text>
         <Text style={styles.normalText}>Data: {item.deadline}</Text>
         <Text style={styles.normalText}>Endereço de entrega:</Text>
         <Text style={styles.normalText}>Rua Irmão José Otão, nº 355,</Text>
@@ -43,15 +43,13 @@ const FreightDetailsCard = ({ item }) => {
       <View style={styles.div}>
         <Text style={styles.boldText}>Mercadoria:</Text>
         <Text style={styles.normalText}>
-          Tipo de caminhã0: {item.truckType}
+          Tipo de caminhão: {item.truckType}
         </Text>
         <Text style={styles.normalText}>Peso bruto: {item.grossWeight} Kg</Text>
         <Text style={styles.normalText}>
           Valor de mercadoria: R$ {item.commodityValue}
         </Text>
-        <Text style={styles.normalText}>
-          Aduana de cruze: {item.customHouse}
-        </Text>
+        <Text style={styles.normalText}>Aduana: {item.customHouse}</Text>
       </View>
     </View>
   );
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: Theme.White,
     width: (94 / 100) * screenWidth,
-    height: 0.7 * screenHeight,
+    height: 0.8 * screenHeight,
     elevation: 5,
     borderRadius: 10,
     shadowColor: Theme.ShadowColor,
@@ -73,12 +71,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 12,
     marginVertical: 12,
-    paddingLeft: 10,
+    paddingHorizontal: 12,
   },
   code: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: 30,
+    marginBottom: 25,
     alignSelf: "center",
   },
   pointsRow: {
@@ -91,11 +89,16 @@ const styles = StyleSheet.create({
   normalText: {
     fontSize: 19,
     fontWeight: "500",
-    marginLeft: 5,
+    marginLeft: 7,
   },
   div: {
     borderTopColor: Theme.ShadowColor,
     borderTopWidth: 1,
     paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  divWithoutBorder: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
 });
