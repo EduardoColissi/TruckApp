@@ -95,7 +95,6 @@ const Routes = () => {
 
         //pegando o token de acesso
         const response = await insertUser(data);
-        console.log(response, data, "response1");
         if (response.status === 200) {
           token = response.data.token;
           await SecureStore.setItemAsync("authorization", token);

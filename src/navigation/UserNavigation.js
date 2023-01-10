@@ -11,7 +11,7 @@ import Theme from "../utils/globalTheme";
 //import das telas
 import Dashboard from "../screens/application/Dashboard";
 import Freights from "../screens/application/Freights";
-import MyFreights from "../screens/application/MyFreights";
+import MyFreight from "../screens/application/MyFreight";
 import Marketplace from "../screens/application/Marketplace";
 import Profile from "../screens/application/Profile";
 import FreightDetails from "../screens/application/FreightDetails";
@@ -55,8 +55,8 @@ export default function UserNavigation() {
           initialParams={{ id: undefined }}
         />
         <Drawer.Screen
-          name="Meus fretes"
-          component={MyFreights}
+          name="Frete atual"
+          component={MyFreight}
           options={{
             drawerIcon: ({ color }) => (
               <FontAwesome5 name="truck-loading" size={22} color={color} />
